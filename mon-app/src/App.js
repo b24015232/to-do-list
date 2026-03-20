@@ -1,23 +1,29 @@
 import logo from './logo.svg';
+import './App.css'
+import { useState } from 'react'
+import TaskCard from './components/TaskCard/TaskCard'
+import data from './data.json'
+import { ETAT_TERMINE } from './ENUMS';
 import './App.css';
 
 function App() {
+  const [tasks, setTasks] = useState(data.taches)
+  const getFoldersForTask = (taskId) => {
+
+    const taskRelations = data.relations.filter(rel => rel.tache === taskId);
+    return taskRelations.map(rel => {
+      return data.dossiers.find(d => d.id === rel.dossier);
+    });
+  };
+  const tasksToDisplay = tasks
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>ToDo List</h1>
+      <ul>
+        {tasksToDisplay.map(task => (
+          <TaskCard key={task.id} task={task} folders={getFoldersForTask(task.id)}></TaskCard>
+        ))}
+      </ul>
     </div>
   );
 }
