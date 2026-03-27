@@ -1,49 +1,48 @@
-import './TaskCard.css'
+import React, { useState } from 'react';
+import './TaskCard.css';
 
-function TaskCard({ task, folders }) {
+function TaskCard({ task, folders, onEdit }) {
+    const [isExpanded, setIsExpanded] = useState(false);
 
-    const colorMap = {
-        "bluesky": "skyblue",
-        "orange": "orange",
-        "pink": "pink",
-        "green": "green"
-    };
-
-    const hasEquipiers = task.equipiers && task.equipiers.length > 0;
-    const backgroundColor = folders && folders.length > 0 ? folders[0].color : '#39393D';
-    const validColor = colorMap[backgroundColor] || backgroundColor;
     return (
-        <li className="task-item" key={task.id} style={{ backgroundColor: validColor }}>
-            <div className="task-main-info">
-                <strong>{task.title}</strong>
-                <br />
-                <span className="task-date">Échéance : {task.date_echeance}</span>
-            </div>
-            {hasEquipiers && (
-                <div className="task-team-section">
-                    <strong> Equipe : </strong>
-                    {task.equipiers.map((membre, index) => (
-                        <span className="team-member" key={index}>
-                            {membre.name}
-                        </span>
-                    ))}
+        <li className={`task-item ${isExpanded ? 'is-expanded' : ''}`}>
+            <div className="task-header">
+                <div className="task-main-info">
+                    <button className="toggle-icon" onClick={() => setIsExpanded(!isExpanded)}>
+                        {isExpanded ? '▼' : '▶'}
+                    </button>
+                    <h3 className="task-title-text">{task.title}</h3>
                 </div>
-
-            )}
-            <div className="task-folders">
-                {folders && folders.map(folder => (
-                    <span
-                        key={folder.id}
-                        className="folder-tag"
-                        style={{ backgroundColor: folder.color }} // On utilise la couleur du JSON [cite: 14, 15, 17]
-                    >
-                        {folder.title}
+                <div className="task-actions">
+                    <button className="edit-card-btn" onClick={(e) => { e.stopPropagation(); onEdit(); }}>
+                        ✏️
+                    </button>
+                    <span className={`status-badge ${task.etat.replace(' ', '-').toLowerCase()}`}>
+                        {task.etat}
                     </span>
-                ))}
+                </div>
             </div>
-
+            <div className="task-details-wrapper">
+                <div className="task-details">
+                    <hr className="separator" />
+                    <p className="task-info-line">Échéance : {task.date_echeance}</p>
+                    <p className="task-info-line description">{task.description || "Aucune description."}</p>
+                    <div className="task-info-line">
+                        <strong>Équipe :</strong>
+                        {task.equipiers?.length > 0 ? task.equipiers.map((m, i) => (
+                            <span key={i} className="team-member">{m.name}</span>
+                        )) : " Aucune équipe"}
+                    </div>
+                    <div className="task-info-line">
+                        <strong>Dossiers :</strong>
+                        {folders.map(f => (
+                            <span key={f.id} className="folder-badge" style={{ backgroundColor: f.color }}>{f.title}</span>
+                        ))}
+                    </div>
+                </div>
+            </div>
         </li>
-    )
+    );
 }
 
-export default TaskCard
+export default TaskCard;

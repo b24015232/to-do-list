@@ -1,0 +1,300 @@
+/* ==========================================================
+   Reset de base pour la modale
+   (pour s'assurer que les paddings sont bien gérés)
+   ========================================================== */
+.modal-overlay,
+.modal-overlay * {
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+      Structure globale (Superposition et Fond flou)
+      ========================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    /* Un fond sombre semi-transparent */
+    background-color: rgba(0, 0, 0, 0.6);
+    /* Un flou d'arrière-plan pour plus d'élégance */
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+    /* Une police nette */
+}
+
+/* ==========================================================
+      Conteneur de la modale (la fenêtre elle-même)
+      ========================================================== */
+.modal-container {
+    /* Fond blanc cassé/clair */
+    background-color: #FBFBFD;
+    border-radius: 20px;
+    /* Bords arrondis modernes */
+    /* Une ombre douce pour la profondeur */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    /* Dimensions responsives */
+    max-width: 450px;
+    width: 90%;
+    padding: 30px;
+    position: relative;
+    /* Pour positionner le bouton de fermeture */
+    color: #333;
+}
+
+/* ==========================================================
+      Titre et Bouton de fermeture
+      ========================================================== */
+.modal-container h2 {
+    /* Couleur bleu nuit de ta ToDo list */
+    color: #251D82;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 25px;
+    letter-spacing: -0.5px;
+}
+
+.modal-container .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.modal-container .close-btn:hover {
+    color: #999;
+}
+
+/* ==========================================================
+      Labels
+      ========================================================== */
+.modal-container label {
+    display: block;
+    font-weight: 600;
+    color: #5D5D5D;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+/* ==========================================================
+      Champs de saisie généraux (Inputs, Textarea, Select, Date)
+      ========================================================== */
+.modal-container input[type="text"],
+.modal-container textarea,
+.modal-container select,
+.modal-container input[type="date"] {
+    width: 100%;
+    padding: 12px 15px;
+    /* Bordure fine et discrète */
+    border: 1px solid #E6E8EA;
+    /* Bords arrondis pour le look "pilule" */
+    border-radius: 12px;
+    font-size: 1rem;
+    background-color: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    appearance: none;
+    /* Uniformiser le select */
+}
+
+/* Effets de focus */
+.modal-container input[type="text"]:focus,
+.modal-container textarea:focus,
+.modal-container select:focus,
+.modal-container input[type="date"]:focus {
+    border-color: #251D82;
+    box-shadow: 0 0 0 2px rgba(37, 29, 130, 0.1);
+    outline: none;
+}
+
+/* Textarea spécifique */
+.modal-container textarea {
+    height: 100px;
+    resize: none;
+    /* Désactiver le redimensionnement */
+    margin-bottom: 20px;
+}
+
+/* ==========================================================
+      Groupes de champs (Échéance, État)
+      ========================================================== */
+.modal-form-row {
+    display: flex;
+    gap: 20px;
+    /* Espace cohérent */
+    margin-bottom: 20px;
+}
+
+.modal-field-group {
+    flex: 1;
+    /* Chaque champ prend 50% */
+}
+
+/* Styliser le sélecteur de date */
+.modal-container input[type="date"] {
+    padding: 11px 15px;
+    /* Ajustement pour la hauteur du select */
+}
+
+/* Styliser le sélecteur d'état */
+.modal-container select {
+    padding-right: 35px;
+    /* Espace pour l'icône de flèche */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="%23aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+}
+
+/* ==========================================================
+      Équipe
+      ========================================================== */
+.modal-team-add {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-team-add input[type="text"] {
+    flex: 1;
+}
+
+/* Bouton "+" circulaire et épuré */
+.modal-team-add button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #E6E8EA;
+    color: #777;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-team-add button:hover {
+    background-color: #DADEDF;
+}
+
+/* ==========================================================
+      Dossiers (Pastilles modernes)
+      ========================================================== */
+.modal-folders-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Gérer le débordement */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* Styliser les pilules de dossier claires */
+.folder-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #5D5D5D;
+    background-color: white;
+    border: 1px solid #D1D1D1;
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+/* Effets au survol */
+.folder-pill:hover {
+    border-color: #AAA;
+    color: #333;
+}
+
+/* Style de pastille sélectionnée unifié */
+.folder-pill.selected {
+    color: #3F474D;
+    border-color: #251D82;
+    background-color: rgba(37, 29, 130, 0.05);
+    box-shadow: 0 2px 5px rgba(37, 29, 130, 0.1);
+}
+
+/* ==========================================================
+      Créer un nouveau dossier
+      ========================================================== */
+.modal-folder-create-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.modal-folder-create-row input[type="text"] {
+    flex: 1;
+}
+
+/* Sélecteur de couleur discret */
+.modal-container input[type="color"] {
+    width: 60px;
+    height: 44px;
+    padding: 0;
+    border-radius: 8px;
+    border: 1px solid #E6E8EA;
+    cursor: pointer;
+    appearance: none;
+    background: none
+}
+
+/* Bouton Créer */
+.modal-folder-create-row button {
+    background-color: #251D82;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0 20px;
+    height: 44px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.modal-folder-create-row button:hover {
+    background-color: #1a1561;
+}
+
+/* ==========================================================
+      Bouton Enregistrer final (Le plus visible)
+      ========================================================== */
+.modal-submit-final {
+    display: block;
+    width: 100%;
+    background-color: #251D82;
+    /* Bleu nuit principal */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s ease-out;
+}
+
+.modal-submit-final:hover {
+    background-color: #1a1561;
+}
+
+.modal-submit-final:active {
+    transform: scale(0.98);
+    /* Petit effet de clic */
+}

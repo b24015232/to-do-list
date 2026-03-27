@@ -1,37 +1,42 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+/* Reset de base pour éviter les débordements invisibles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
   background-color: #282c34;
+  /* Fond clair pour faire ressortir les cartes */
+}
+
+.App {
+  max-width: 500px;
+  /* Largeur max d'un téléphone */
+  margin: 0 auto;
+  /* Centre toute l'application sur l'écran */
+  padding: 15px;
+  padding-bottom: 120px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  /* Centre les éléments enfants (H1, FilterBar, etc.) */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  color: #251D82;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+/* On nettoie la liste pour qu'elle soit bien centrée */
+.task-list {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  list-style: none;
 }
